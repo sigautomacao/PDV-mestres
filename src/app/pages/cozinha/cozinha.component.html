@@ -1,0 +1,89 @@
+<div class="container mt-10">
+   <div class="card">
+      <div class="table-responsive-sm">
+
+         <table class=" table">
+            <thead class="bg-light">
+               <th class="text-left" width="5%">#</th>
+               <th class="text-left" width="40%">Cliente</th>
+               <th class="text-right" width="15%">Status</th>
+               <th class="text-right" width="20%">Data e Hora</th>
+               <!-- <th class="text-right" width="20%">Total R$</th> -->
+            </thead>
+            <tbody>
+               <tr *ngFor="let vendas of vendasList" (dblclick)="get_venda(vendas.id_venda)" class="trclick">
+                  <td class="text-left" width="5%">{{vendas.id_venda}}</td>
+                  <td class="text-left" width="40%">
+                     {{(vendas.cliente != '' && vendas.cliente != null) ? vendas.cliente : 'Consumidor'}}</td>
+                  <td class="text-right" width="15%">
+                     <span class="badge badge-secondary" *ngIf="vendas.status_cozinha == 1">Novo</span>
+                     <span class="badge badge-success" *ngIf="vendas.status_cozinha == 10">Pronto</span>
+                  </td>
+                  <td class="text-right" width="20%">{{vendas.data | date:'dd/MM/yyyy HH:mm'}}</td>
+                  <!-- <td class="text-right" width="20%">{{ vendas.total | currency:'R$ ':false:'1.2':'pt' }}</td> -->
+               </tr>
+            </tbody>
+         </table>
+
+      </div>
+   </div>
+
+</div>
+
+
+<!-- //modal detalhe da venda -->
+<ng-template #modalVendaDetalhe let-modal>
+   <div class="modal-header" style="padding-bottom: 0 !important;">
+      <h4 class="modal-title">Detalhe do Pedido</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+
+      <div class="row">
+         <div class="col-sm-6">
+            <div class="card">
+               <div class="card-body">
+                  <div>
+                     <span>Pedido: </span>
+                     <strong>{{vendaDetalhe.id_venda}}</strong>
+                  </div>
+                  <div>
+                     <span>Cliente: </span>
+                     <strong>{{vendaDetalhe.cliente}}</strong>
+                  </div>
+                  <div>
+                     <span>Observações: </span>
+                     <br>
+                     <strong>{{vendaDetalhe.obs}}</strong>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+
+         <div class="col-sm-6">
+            <div class="card">
+               <div class="card-body">
+                  <div align="center">
+                     <h6>Itens do Pedido:</h6>
+                  </div>
+
+                  <div *ngFor="let item of vendaDetalhe.itens">
+                     <strong>{{item.quantidade +' - '+item.descricao}}</strong>
+                  </div>
+               </div>
+            </div>
+
+         </div>
+      </div>
+
+   </div>
+   <div class="modal-footer">
+      <button class="btn btn-success" (click)="finalizar(vendaDetalhe.id_venda)">
+         <i class="fas fa-check"></i> Pronto!
+      </button>
+   </div>
+</ng-template>
+<!-- //fim modal detalhe da venda -->

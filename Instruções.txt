@@ -1,0 +1,15 @@
+Projeto feito em angular 9x
+
+back-end em PHP 7x
+
+Banco de dados MySQL
+
+
+1 - instalar o banco
+2 - configurar o arquivo "init.php" na pasta "api_mestres/"
+3 - por a pasta "api_mestres" no servidor php
+4 - configurar a variavel "baseURL" no arquivo "model.ts" na pasta "src/app/services/"
+
+5 - instalar as dependencias com o "npm install"
+
+6 - rodar o projeto com "ng serve"

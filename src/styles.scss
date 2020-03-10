@@ -1,1 +1,363 @@
 /* You can add global styles to this file, and also import other style files */
+$primary: #505050;
+
+:host {
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol";
+   font-size: 14px;
+   color: #333;
+   box-sizing: border-box;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+*::-webkit-scrollbar {
+   width: 5px;
+   height: 5px;
+   padding: 18px;
+}
+
+*::-webkit-scrollbar-thumb {
+   background: #9e9e9e -webkit-gradient(linear, 0% 0%, 0% 100%, from($primary), to(#343a40));
+   padding: 8px;
+   width: 5px;
+   height: 5px;
+}
+
+*::-webkit-scrollbar-button:start:decrement,
+*::-webkit-scrollbar-button:end:increment {
+   display: none;
+}
+
+*::-webkit-scrollbar-thumb:vertical,
+*::-webkit-scrollbar-thumb:horizontal {
+   height: 3px;
+   width: 3px;
+   margin: 3px;
+}
+
+body {
+   background: #f1f1f1;
+   height: 100%;
+   width: 100%;
+}
+
+.navbar {
+   padding: 0.2rem 1rem;
+}
+.navbar-brand {
+   max-width: 12%;
+   img {
+      max-width: 100%;
+   }
+}
+
+.sidebar {
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 100;
+   padding: 48px 0 0;
+   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+.sidebar-mini {
+   max-width: 60px;
+   .sidebar-sticky {
+      a {
+         span {
+            display: none;
+         }
+      }
+   }
+}
+.sidebar-mini:hover {
+   max-width: 150px;
+   .sidebar-sticky {
+      a {
+         span {
+            display: inline-block;
+            margin-left: 8px;
+         }
+      }
+   }
+}
+
+.sidebar-sticky {
+   position: relative;
+   top: 0;
+   height: calc(100vh - 48px);
+   padding-top: 0.5rem;
+   overflow-x: hidden;
+   overflow-y: auto;
+}
+
+.icon-logo {
+   text-align: center;
+   img {
+      max-width: 100%;
+      height: 100px;
+   }
+}
+
+.contain {
+   width: 100%;
+   padding-right: 2%;
+   padding-left: 2%;
+   margin-right: auto;
+   margin-left: auto;
+}
+
+.card-body {
+   padding: 0.5rem 1rem;
+}
+
+.table .thead-outline-roxo th {
+   color: $primary;
+}
+
+.trclick:hover {
+   background: #a8a8a8;
+   color: white;
+}
+
+.footer-pdv {
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+   padding: 0.5rem;
+   text-align: center;
+
+   .btn {
+      margin: 0 5px;
+   }
+}
+
+.cursor-p {
+   cursor: pointer;
+}
+
+.col,
+.col-1,
+.col-10,
+.col-11,
+.col-12,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-auto,
+.col-lg,
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-auto,
+.col-md,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-auto,
+.col-sm,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-auto,
+.col-xl,
+.col-xl-1,
+.col-xl-10,
+.col-xl-11,
+.col-xl-12,
+.col-xl-2,
+.col-xl-3,
+.col-xl-4,
+.col-xl-5,
+.col-xl-6,
+.col-xl-7,
+.col-xl-8,
+.col-xl-9,
+.col-xl-auto {
+   padding-right: 10px;
+   padding-left: 10px;
+}
+
+//tools
+.mt-10 {
+   margin-top: 1rem;
+}
+.mb-0 {
+   margin-bottom: 0;
+}
+.pd-0 {
+   padding: 0;
+}
+
+.no-border {
+   border: 0;
+}
+
+.text-left {
+   text-align: left;
+}
+.text-center {
+   text-align: center;
+}
+.text-right {
+   text-align: right;
+}
+
+.bg-roxo {
+   background: $primary;
+   color: white;
+}
+.bg-dark {
+   background-color: #343a40 !important;
+   color: white;
+}
+
+.card-click {
+   margin: 5px;
+   padding: 5px;
+   span {
+      display: block;
+      font-size: 12px;
+   }
+   img {
+      max-width: 80%;
+      height: 70px;
+      border-radius: 5px;
+   }
+}
+.card-click:hover {
+   background: #bbbbbb;
+   border-radius: 8px;
+   cursor: pointer;
+}
+
+.modal-md {
+   max-width: 600px;
+}
+
+//swal2
+.swal2-sm {
+   width: 25em !important;
+   font-size: 12px !important;
+}
+.swal2-input[type="number"] {
+   max-width: 100% !important;
+}
+.swal2-file:focus,
+.swal2-input:focus,
+.swal2-textarea:focus {
+   border: 1px solid #002c40 !important;
+   box-shadow: 0 0 3px #002c40 !important;
+}
+
+///loading
+.lds-dual-ring {
+   display: inline-block;
+   width: 80px;
+   height: 80px;
+}
+.lds-dual-ring:after {
+   content: " ";
+   display: block;
+   width: 64px;
+   height: 64px;
+   margin: 8px;
+   border-radius: 50%;
+   border: 6px solid #0051bb;
+   border-color: #0088c5 transparent #0088c5 transparent;
+   animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+   0% {
+      transform: rotate(0deg);
+   }
+   100% {
+      transform: rotate(360deg);
+   }
+}
+
+#loading {
+   display: none;
+   position: fixed;
+   z-index: 1060;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   -webkit-box-orient: horizontal;
+   -webkit-box-direction: normal;
+   flex-direction: row;
+   -webkit-box-align: center;
+   align-items: center;
+   -webkit-box-pack: center;
+   justify-content: center;
+   padding: 0.625em;
+   overflow-x: hidden;
+   -webkit-transition: background-color 0.1s;
+   transition: background-color 0.1s;
+   -webkit-overflow-scrolling: touch;
+   -webkit-box-align: center;
+   align-items: center;
+   background: rgba(0, 0, 0, 0.4);
+}
+
+.loading-body {
+   display: flex;
+   position: relative;
+   box-sizing: border-box;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   flex-direction: column;
+   -webkit-box-pack: center;
+   justify-content: center;
+   width: 30em;
+   max-width: 100%;
+   padding: 1.25em;
+   border: none;
+   border-radius: 1.3125em;
+   background: #fff;
+   font-family: inherit;
+   font-size: 1rem;
+   align-items: center;
+}
+
+.loading-sm {
+   max-width: 20% !important;
+   width: auto !important;
+}
+.loading-md {
+   max-width: 40% !important;
+   width: auto !important;
+}

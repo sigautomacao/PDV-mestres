@@ -1,0 +1,13 @@
+{
+   "name": "sig/api_mestres",
+   "authors": [
+      {
+         "name": "sigautomacao",
+         "email": "sigautomacao@gmail.com"
+      }
+   ],
+   "require": {
+      "nfephp-org/sped-pos": "dev-master",
+      "mike42/escpos-php": "^2.1"
+   }
+}

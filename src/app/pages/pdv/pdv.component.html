@@ -1,0 +1,517 @@
+<div class="contain mt-10">
+   <div class="row form-group">
+
+      <div class="col-sm-3">
+         <div class="card bg-roxo">
+            <div class="card-body">
+               <span class="card-title mb-0">Usuário:</span>
+               <br><strong [innerHTML]="usuario.id+' - '+ usuario.login"></strong>
+            </div>
+         </div>
+      </div>
+      <div class="col-sm-6">
+         <div class="card bg-roxo">
+            <div class="card-body">
+               <span class="card-title mb-0">Cliente: <i class="fas fa-plus-circle cursor-p" (click)="manual_cliente()"></i></span>
+               <br><strong>
+                  {{(venda.cliente == '') ? '*** Cosumidor Final ***' : venda.cliente}}
+               </strong>
+            </div>
+         </div>
+      </div>
+      <div class="col-sm-3">
+         <div class="card bg-roxo">
+            <div class="card-body">
+               <span class="card-title mb-0">Cupom: </span><strong [innerHTML]="venda.id_venda"></strong>
+               <br><strong>{{(venda.status == '1') ? '*** Venda Aberta ***' : 'Venda Fechada'}}</strong>
+            </div>
+         </div>
+      </div>
+
+   </div>
+
+   <div class="row form-group">
+      <div class="col-sm-5">
+
+         <div class="card" [style.height.px]="screenHeight - (screenHeight * 0.368)">
+            <div class="card-body">
+
+               <div class="row">
+                  <div class="col-sm-4 form-group text-center" *ngFor="let best of produtos_best_sales">
+                     <div class="card-click" (click)="select_produto(best)">
+                        <img [src]="(best.foto != '' ? best.foto : 'assets/imgs/no-image.png')"
+                           alt="{{best.descricao}}">
+                        <span>{{best.descricao}}</span>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- <div class="row form-group">
+                  <div class="col-sm-6">
+                     <div class="card bg-roxo no-border">
+                        <div class="card-body pd-0 icon-logo">
+                           <img src="assets/imgs/icon-mestres.png" alt="">
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                     <div class="card no-border">
+                        <div class="card-body pd-0 icon-logo">
+                           <img src="assets/imgs/no-image.png" alt="">
+                        </div>
+                     </div>
+                  </div>
+               </div> -->
+
+               <!-- <hr> -->
+
+               <!-- <div class="row form-group">
+                  <div class="col-sm-12">
+                     <input type="text" class="form-control" placeholder="Digite ou passe o leitor">
+                  </div>
+               </div> -->
+
+               <!-- <div class="row form-group">
+                  <div class="col-sm-12">
+                     <span class="card-title mb-0">Produto:</span>
+                     <br>
+                     <strong>1258 - X-BURGUER</strong>
+                  </div>
+
+               </div>
+
+               <hr>
+
+               <div class="row">
+                  <div class="col-sm-4 text-left">
+                     <span class="card-title mb-0">QTDE.:</span>
+                     <br>
+                     <strong>2,00</strong>
+                  </div>
+                  <div class="col-sm-4 text-center">
+                     <span class="card-title mb-0">Valor Unit.:</span>
+                     <br>
+                     <strong>R$ 8,00</strong>
+                  </div>
+                  <div class="col-sm-4 text-right">
+                     <span class="card-title mb-0">Subtotal:</span>
+                     <br>
+                     <strong>R$ 16,00</strong>
+                  </div>
+               </div> -->
+
+            </div>
+         </div>
+
+      </div>
+
+      <div class="col-sm-7">
+         <div class="card">
+
+            <div class="col-sm-12 form-group" style="padding-top: 5px;">
+               <input type="text" #inputSearch class="form-control" (keyup.enter)="search_item()"
+                  placeholder="Digite ou passe o leitor">
+            </div>
+
+            <div class="table-responsive-sm">
+               <table class="table mb-0">
+                  <thead class="thead-outline-roxo">
+                     <tr>
+                        <th class="text-left" width="8%">#</th>
+                        <th class="text-left" width="47%">Descrição</th>
+                        <th class="text-center" width="15%">Qtd</th>
+                        <th class="text-right" width="15%">Preço</th>
+                        <th class="text-right" width="15%">Total</th>
+                     </tr>
+                  </thead>
+               </table>
+               <div [style.height.px]="screenHeight - (screenHeight * 0.52)">
+                  <div style="overflow-y: auto; max-height: 70%;">
+                     <table class="table mb-0">
+                        <tbody>
+                           <tr *ngFor="let item of itens; let i = index;">
+                              <td class="text-left" width="8%">{{i+1}}</td>
+                              <td class="text-left" width="47%">{{item.descricao}}</td>
+                              <td class="text-center" width="15%">{{ item.quantidade}}</td>
+                              <td class="text-right" width="15%">
+                                 {{ item.valor_unitario | currency:'R$ ':false:'1.2':'pt' }}
+                              </td>
+                              <td class="text-right" width="15%">
+                                 {{ item.valor_unitario * item.quantidade | currency:'R$ ':false:'1.2':'pt' }}
+                              </td>
+                           </tr>
+
+                        </tbody>
+                     </table>
+                  </div>
+
+                  <div class="totalizador">
+                     <div class="row">
+                        <div class="col-sm-6">
+                           <div>
+                              <span>
+                                 Subtotal: <strong>{{ venda.subtotal | currency:'R$ ':false:'1.2':'pt' }}</strong>
+                              </span>
+                           </div>
+                           <div>
+                              <span>
+                                 Desconto: <strong>{{ venda.vdesc | currency:'R$ ':false:'1.2':'pt' }}</strong>
+                              </span>
+                           </div>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                           <h5>Total a Pagar</h5>
+                           <h4>{{ venda.total | currency:'R$ ':false:'1.2':'pt' }}</h4>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+      </div>
+   </div>
+</div>
+
+
+<footer class="footer-pdv">
+   <div class="container">
+      <button class="btn btn-primary" (click)="gera_venda()">
+         <i class="fas fa-plus-circle"></i>
+         Nova Venda
+      </button>
+      <button class="btn btn-secondary" (click)="list_produtos()">
+         <i class="fas fa-list"></i>
+         Produtos
+      </button>
+      <button class="btn btn-secondary" (click)="list_vendas()">
+         <i class="fas fa-list"></i>
+         Vendas
+      </button>
+      <button class="btn btn-warning" (click)="cancel_item()">
+         <i class="fas fa-times"></i>
+         Cancelar Item
+      </button>
+      <button class="btn btn-danger" (click)="cancel_venda()">
+         <i class="fas fa-times-circle"></i>
+         Cancelar Venda
+      </button>
+      <button class="btn btn-success" (click)="end_modal_venda()">
+         <i class="fas fa-check"></i>
+         Finalizar
+      </button>
+      <button class="btn btn-dark" (click)="open_config()">
+         <i class="fas fa-cog fa-spin"></i>
+      </button>
+      <button class="btn btn-outline-dark" (click)="qzInit()">
+         <i class="fas fa-print"></i>
+      </button>
+   </div>
+</footer>
+
+<!-- //modal Lista de vendas -->
+<ng-template #modalListVendas let-modal>
+   <div class="modal-header" style="padding-bottom: 0 !important;">
+      <h4 class="modal-title">Lista de Vendas</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+
+      <div class="row" style="padding-bottom: 10px;">
+         <div class="col-sm-5">
+            <input type="text" class="form-control form-control-sm" placeholder="Digite o NOME do Cliente..."
+               [(ngModel)]="filtros.cliente" (keyup)="search_vendas()" />
+         </div>
+         <div class="col-sm-3">
+            <select type="text" class="form-control form-control-sm" [(ngModel)]="filtros.status"
+               (change)="search_vendas()">
+               <option value="1" selected>Abertas</option>
+               <option value="10">Finalizadas</option>
+               <option value="0">Canceladas</option>
+            </select>
+         </div>
+         <div class="col-sm-3">
+            <input type="date" class="form-control form-control-sm" [(ngModel)]="filtros.data"
+               (change)="search_vendas()" (keyup.enter)="search_vendas()" />
+         </div>
+         <div class="col-sm-1">
+            <button class="btn btn-sm btn-info" (click)="search_vendas()">
+               <i class="fas fa-search"></i>
+            </button>
+         </div>
+      </div>
+
+      <div class=" table-responsive">
+         <table class=" table">
+            <thead class="bg-light">
+               <th class="text-left" width="5%">#</th>
+               <th class="text-left" width="40%">Cliente</th>
+               <th class="text-right" width="15%">Status</th>
+               <th class="text-right" width="20%">Data e Hora</th>
+               <th class="text-right" width="20%">Total R$</th>
+            </thead>
+            <tbody>
+               <tr *ngFor="let vendas of vendasList" (dblclick)="get_venda(vendas.id_venda)" class="trclick">
+                  <td class="text-left" width="5%">{{vendas.id_venda}}</td>
+                  <td class="text-left" width="40%">
+                     {{(vendas.cliente != '' && vendas.cliente != null) ? vendas.cliente : 'Consumidor'}}</td>
+                  <td class="text-right" width="15%">
+                     <span class="badge badge-secondary" *ngIf="vendas.status == 1">Aberta</span>
+                     <span class="badge badge-success" *ngIf="vendas.status == 10">Finalizada</span>
+                     <span class="badge badge-infor" *ngIf="vendas.status == 100">NFC-e Autorizada</span>
+                     <span class="badge badge-danger"
+                        *ngIf="vendas.status == 101 || vendas.status == 135 || vendas.status == 155">NFC-e
+                        Cancelada</span>
+                     <span class="badge badge-danger" *ngIf="vendas.status == 0">Cancelada</span>
+                  </td>
+                  <td class="text-right" width="20%">{{vendas.data | date:'dd/MM/yyyy HH:mm'}}</td>
+                  <td class="text-right" width="20%">{{ vendas.total | currency:'R$ ':false:'1.2':'pt' }}</td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+
+   </div>
+</ng-template>
+<!-- //fim modal Lista de vendas -->
+
+<!-- //modal Lista de Produtos -->
+<ng-template #modalListProdutos let-modal>
+   <div class="modal-header" style="padding-bottom: 0 !important;">
+      <h4 class="modal-title">Pesquisa de Produtos</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+
+      <div class="row" style="padding-bottom: 10px;">
+         <div class="col-sm-5">
+            <input type="text" class="form-control form-control-sm" placeholder="Digite sua busca aqui..."
+               (keyup)="search_produtos()" [(ngModel)]="searchProdutos" />
+         </div>
+      </div>
+
+      <div class=" table-responsive">
+         <table class=" table mb-0">
+            <thead class="bg-dark">
+               <th class="text-left" width="5%">#</th>
+               <th class="text-left" width="40%">Produto</th>
+               <th class="text-right" width="15%">Referência</th>
+               <th class="text-right" width="20%">Estoque</th>
+               <th class="text-right" width="20%">Valor Unit.</th>
+            </thead>
+         </table>
+      </div>
+      <div class="table-responsive" [style.max-height.px]="screenHeight - 150">
+         <table class="table mb-0">
+            <tbody>
+               <tr *ngFor="let produto of produtos_list; let i = index"
+                  (dblclick)="search_item_d(produto.id_produto, 1)" class="trclick">
+                  <td class="text-left" width="5%">{{produto.id_produto}}</td>
+                  <td class="text-left" width="40%">{{produto.descricao}}</td>
+                  <td class="text-right" width="15%">{{produto.referencia}}</td>
+                  <td class="text-right" width="20%">{{produto.estoque}}</td>
+                  <td class="text-right" width="20%">{{ produto.valor_unitario | currency:'R$ ':false:'1.2':'pt' }}</td>
+               </tr>
+            </tbody>
+         </table>
+         <!-- <div align="center" *ngIf="produtosList.length <= 0">
+            <strong>Nada foi encontrado!</strong>
+         </div> -->
+      </div>
+
+   </div>
+</ng-template>
+<!-- //fim modal Lista de Produtos -->
+
+<!-- //modal Finaliza Venda -->
+<ng-template #modalEndVenda let-modal>
+   <div class="modal-header" style="padding-bottom: 0 !important;">
+      <h4 class="modal-title">Finalizar Venda</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+
+      <div class="row">
+
+         <div class="col-sm-4 form-group">
+            <div class="row">
+               <div class="col-sm-12 pd-lr-10">
+                  <strong>Subtotal:</strong>
+                  <input type="text" class="form-control form-control-sm" disabled currencyMask
+                     [(ngModel)]="venda.subtotal">
+               </div>
+               <div class="col-sm-12 pd-lr-10">
+                  <span>Desconto %:</span>
+                  <input type="text" class="form-control form-control-sm" (blur)="gera_vdesc()"
+                     (keyup.enter)="gera_vdesc()" currencyMask [options]="{ prefix: '% ' }"
+                     [disabled]="this.paymentsCurrent.length > 0" [(ngModel)]="venda.desc">
+               </div>
+               <div class="col-sm-12 pd-lr-10">
+                  <span>Desconto R$:</span>
+                  <input type="text" class="form-control form-control-sm" (blur)="gera_desc()"
+                     (keyup.enter)="gera_desc()" currencyMask [disabled]="this.paymentsCurrent.length > 0"
+                     [(ngModel)]="venda.vdesc">
+               </div>
+
+               <div class="col-sm-12 pd-lr-10">
+                  <strong>Total R$:</strong>
+                  <input type="text" class="form-control form-control-sm" disabled currencyMask
+                     [(ngModel)]="venda.total">
+               </div>
+            </div>
+         </div>
+
+         <div class="col-sm-8 form-group">
+            <div class="row">
+               <div class="col-sm-12 pd-lr-10 form-group-sm">
+                  <strong>Formas de Pagamento</strong>
+                  <select class="form-control form-control-sm" [(ngModel)]="selectPayments"
+                     (change)="change_payment($event)">
+                     <option value="" selected>Seleciona uma opção</option>
+                     <option *ngFor="let payment of paymentsList" [value]="payment.id_pay">{{payment.descricao}}
+                     </option>
+                  </select>
+               </div>
+
+               <div class="col-sm-12 pd-lr-10">
+                  <table class="table">
+                     <tr *ngFor="let paymentCurrent of paymentsCurrent; let i = index;">
+                        <td>{{paymentCurrent.descricao}}: </td>
+                        <td>{{ paymentCurrent.valor | currency:'R$ ':false:'1.2':'pt' }}</td>
+                        <td class="table-action">
+                           <!-- <a class="table-action text-secondary pd-l-5" href="javascript:void(0)"
+                              (click)="changeCheque(i)" *ngIf="paymentCurrent.id_pay == 4">
+                              <i class=" fas fa-edit"></i>
+                           </a> -->
+                           <!-- <a class="table-action text-secondary pd-l-5" href="javascript:void(0)"
+                              (click)="openModalCrediario()" *ngIf="paymentCurrent.id_pay == 5">
+                              <i class=" fas fa-edit"></i>
+                           </a> -->
+                           <a class="table-action text-danger pd-l-5" href="javascript:void(0)"
+                              (click)="remove_payment(i)">
+                              <i class=" fas fa-trash"></i>
+                           </a>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+         </div>
+
+         <div class="col-sm-12">
+            <textarea class="form-control" placeholder="Observações do pedido" rows="5" [(ngModel)]="venda.obs"></textarea>
+         </div>
+      </div>
+   </div>
+   <div class="modal-footer" align="right">
+      <!-- <button class="btn btn-sm btn-secondary" (click)="save_venda()">
+         Salvar
+      </button> -->
+      <button class="btn btn-sm btn-primary" (click)="end_venda()">
+         Finalizar
+      </button>
+   </div>
+</ng-template>
+<!-- //fim modal Finaliza Venda -->
+
+<!-- //modal Options print -->
+<ng-template #modalOptions let-modal>
+   <div class="modal-header" style="padding-bottom: 0 !important;" align="center">
+      <h4>Venda Finalizada com sucesso!</h4>
+   </div>
+   <div class="modal-body">
+      <div style="padding: 10px 0px; font-size: 18px;" align="center">
+         Troco: <strong class="text-success">{{ troco_valor | currency:'R$ ':false:'1.2':'pt'}}</strong>
+      </div>
+      <div align="center">
+         <button class="btn btn-success" (click)="print_cupom(venda.id_venda)">Cupom</button>
+         <!-- <button class="btn btn-primary" (click)="send_nfce(venda.id_venda)">NFC-e</button> -->
+         <!-- <button class="btn btn-primary" (click)="print_nfc(venda.id_venda)">NFC-e</button> -->
+      </div>
+   </div>
+
+   <div class="modal-footer" align="center">
+      <button class="btn btn-sm btn-secondary" (click)="restart(); modal.close('Cross click')">
+         Ok
+      </button>
+   </div>
+</ng-template>
+<!-- //fim modal Options print -->
+
+<!-- //modal Manual inclusão Cliente -->
+<ng-template #modalClienteManual let-modal>
+   <div class="modal-header" style="padding-bottom: 0 !important;">
+      <h4 class="modal-title">Incluir de Cliente</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+
+      <div class="row">
+
+         <div class="col-sm-12">
+            <span>Cliente*:</span>
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="clienteCurrent.cliente">
+         </div>
+
+         <!-- <div class="col-sm-12">
+            <span>CPF ou CNPJ*:</span>
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="clienteCurrent.cpf">
+         </div> -->
+
+      </div>
+
+   </div>
+
+   <div class="modal-footer" align="right">
+      <button class="btn btn-sm btn-primary" (click)="set_cliente(0);">
+         Confirmar
+      </button>
+   </div>
+</ng-template>
+<!-- //fim modal Manual inclusão Cliente -->
+
+<!-- //modal Manual inclusão Cliente -->
+<ng-template #modalConfigPDV let-modal>
+   <div class="modal-header" style="padding-bottom: 0 !important;">
+      <h4 class="modal-title">Configurações PDV</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+
+      <div class="row">
+
+         <div class="col-sm-8">
+            <span>Impressora Padrão:</span>
+            <select type="text" class="form-control form-control-sm" [(ngModel)]="configPDV.local.printPD">
+               <option value="Selecione uma opção"></option>
+               <option *ngFor="let printer of listPrints" [value]="printer">{{printer}}</option>
+            </select>
+         </div>
+         <div class="col-sm-4">
+            <button class="btn btn-sm btn-outline-info mt-20" (click)="print_teste(configPDV.local.printPD)">
+               <i class="fas fa-print"></i>
+            </button>
+         </div>
+
+      </div>
+
+   </div>
+
+   <div class="modal-footer" align="right">
+      <button class="btn btn-sm btn-primary" (click)="set_config();">
+         Confirmar
+      </button>
+   </div>
+</ng-template>
+<!-- //fim modal Manual inclusão Cliente -->

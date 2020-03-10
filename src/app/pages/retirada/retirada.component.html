@@ -1,0 +1,18 @@
+<div class="bg-retirada-full">
+
+   <div class="bg-dark card-full">
+
+      <div *ngIf="vendaCurrent.cliente">
+         <span>Cliente: </span>
+         <h1>{{vendaCurrent.cliente}}</h1>
+
+         <h3>Seu pedido está pronto!</h3>
+      </div>
+
+      <div *ngIf="!vendaCurrent.cliente">
+         <img src="assets/imgs/logo-mestres.png" alt="">
+      </div>
+
+   </div>
+
+</div>
